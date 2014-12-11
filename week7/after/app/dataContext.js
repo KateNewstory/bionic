@@ -36,6 +36,7 @@
 
         add: add,
         update: update,
+        remove:remove,
 
         getById: getById,
         getCollection: getCollection
@@ -150,6 +151,26 @@
             result.continue();
         };
 
+        cursorRequest.onerror = function (e) {
+            dfd.reject(e);
+        };
+
+        return dfd.promise;
+    }
+
+    function remove(task) {
+
+        var dfd = Q.defer();
+
+        var db = storage.db;
+        var trans = db.transaction(["tasks"], "readwrite");
+        var store = trans.objectStore("tasks");
+
+        var cursorRequest = store.delete(task.id);
+
+        cursorRequest.onsuccess = function (e) {
+            dfd.resolve();
+        };
         cursorRequest.onerror = function (e) {
             dfd.reject(e);
         };

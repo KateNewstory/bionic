@@ -8,8 +8,8 @@
 
     <ul class="list-group">
         <!-- ko foreach: tasks -->
-        <li class="list-group-item">
-            <a href="#" data-bind="text: title, attr: { 'href': '#task/' + id }"></a>
+        <li class="list-group-item" style="overflow: hidden">
+            <a href="#" data-bind="text: title, attr: { 'href': '#task/' + id }"></a><button class="btn btn-primary" style="float: right" data-bind="click:$root.remove">Delete</button>
         </li>
         <!-- /ko -->
     </ul>

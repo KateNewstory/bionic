@@ -3,7 +3,8 @@
     var viewModel = {
         tasks: ko.observableArray(),
 
-        activate: activate
+        activate: activate,
+        remove : remove
     };
 
     return viewModel;
@@ -13,5 +14,13 @@
         return dataContext.getCollection().then(function (tasks) {
             viewModel.tasks(tasks);
         });
+    };
+
+    function remove(task) {
+        dataContext.remove(task).then(function () {
+            viewModel.tasks.remove(task);
+        }).catch(function () {
+
+            });
     }
 })
